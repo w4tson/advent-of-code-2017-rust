@@ -1,0 +1,4 @@
+[[package]]
+name = "advent-of-code-2017-rust"
+version = "0.1.0"
+
