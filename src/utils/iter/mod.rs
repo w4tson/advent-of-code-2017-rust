@@ -1,5 +1,6 @@
 use std::str::Chars;
 
+
 pub trait CircularIterable {
     fn circular_iter(&self) -> CircularIter;
 }
@@ -41,3 +42,4 @@ impl CircularIterable for str {
         CircularIter::new(&self)
     }
 }
+
