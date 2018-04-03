@@ -1,6 +1,6 @@
 
-use super::part1::solve;
-use super::part2::solve as solve_part2;
+use day1::part1::solve;
+use day1::part2::solve as solve_part2;
 use utils::file::read_puzzle_input;
 
 #[test]
@@ -30,5 +30,5 @@ fn part2_examples() {
 #[test]
 fn part2() {
     let input = read_puzzle_input("aoc1");
-//    assert_eq!(950, solve_part2(&input));
+    assert_eq!(950, solve_part2(&input));
 }

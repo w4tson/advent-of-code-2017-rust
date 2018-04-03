@@ -1,6 +1,7 @@
 use utils::file::read_puzzle_input;
 
 pub mod part1;
+pub mod part2;
 #[cfg(test)]
 pub mod tests;
 
