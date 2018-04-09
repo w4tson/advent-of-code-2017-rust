@@ -4,3 +4,4 @@ version = "0.1.0"
 authors = ["Paul Watson <paul.watson@pdwtech.com>"]
 
 [dependencies]
+spectral = "0.6.0"

@@ -1,10 +1,42 @@
-use day3::part1::calc_corner;
-use day3::part1::ring;
 use day3::part1::solve;
+use day3::calc_corner;
+use day3::ring;
+use day3::Location;
+use spectral::prelude::*;
+use spectral::assert_that;
+use std::vec::Vec;
+use std::borrow::Borrow;
 
 #[test]
 fn part1() {
     assert_eq!(419, solve(289326));
+}
+
+#[test]
+fn test_locations_around_me() {
+    let origin = Location { x: 0, y: 0 };
+    
+    let locations = origin.locations_around_me()
+        .into_iter()
+        .map(|l| (l.x, l.y))
+        .collect::<Vec<(i32, i32)>>();
+    
+
+    assert_that(&locations)
+        .contains_all_of(&vec![
+            &(-1, 1),
+            &(0, 1),
+            &(1, 1),
+            &(-1, 0),
+            &(1, 0),
+            &(-1, -1),
+            &(0, -1),
+            &(1, -1)
+        ]);
+
+    assert_that(&locations).has_length(8);
+
+
 }
 
 #[test]
@@ -16,7 +48,7 @@ fn examples() {
     
 }
 
-#[test  ]
+#[test]
 fn test_bottom_corner() {
     assert_eq!(1, calc_corner(1));
     assert_eq!(9, calc_corner(2));
