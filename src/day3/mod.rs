@@ -3,14 +3,14 @@ pub mod part2;
 #[cfg(test)]
 pub mod tests;
 
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, PartialEq, Eq, Hash)]
 pub struct Location {
     x : i32,
     y : i32
 }
 
-#[derive(Debug)]
-struct LocStat {
+#[derive(Debug, Clone)]
+pub struct LocStat {
     location : Location,
     direction : Direction
 }
@@ -41,6 +41,7 @@ impl Location {
 
 
 impl LocStat {
+    
     fn turn_and_advance(&self) -> LocStat {
         let new_direction = self.new_direction();
         LocStat {

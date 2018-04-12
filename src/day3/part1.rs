@@ -1,7 +1,6 @@
 use day3::LocStat;
 use day3::Location;
 use day3::Direction;
-use day3::should_turn;
 
 pub fn solve(num: u32) -> u32 {
     let mut locstat = LocStat { 

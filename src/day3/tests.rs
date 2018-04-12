@@ -5,7 +5,13 @@ use day3::Location;
 use spectral::prelude::*;
 use spectral::assert_that;
 use std::vec::Vec;
-use std::borrow::Borrow;
+use day3::part2::day3part2;
+
+
+#[test]
+fn part2() {
+    assert_eq!(295229, day3part2(289326));
+}
 
 #[test]
 fn part1() {
