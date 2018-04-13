@@ -2,7 +2,6 @@ use day4::part1::is_passphrase_valid;
 use utils::file::read_puzzle_input;
 use spectral::assert_that;
 use spectral::prelude::*;
-use day4::part2::ordered_chars;
 use day4::part2::sort_chars_in_words;
 
 #[test]
