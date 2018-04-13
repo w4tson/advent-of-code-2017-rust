@@ -1,5 +1,5 @@
-pub fn calc_num_steps(inputStr : String) -> u32 {
-    let instr: Vec<i32> = inputStr.lines()
+pub fn calc_num_steps(input_str: String) -> u32 {
+    let instr: Vec<i32> = input_str.lines()
         .filter_map(|line| line.trim().parse::<i32>().ok())
         .collect();
 
