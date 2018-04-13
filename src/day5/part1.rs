@@ -1,24 +1,19 @@
-pub fn calc_num_steps(input_str: String) -> u32 {
-    let instr: Vec<i32> = input_str.lines()
-        .filter_map(|line| line.trim().parse::<i32>().ok())
+use std::cell::Cell;
+
+pub fn calc_num_steps<F>(input_str: String, f: F) -> u32
+    where F : Fn(i32) -> i32 {
+    let instructions: Vec<Cell<i32>> = input_str.lines()
+        .filter_map(|line| line.trim().parse::<i32>().map(Cell::new).ok())
         .collect();
 
-    process(instr)
-}
-
-fn process(instructions : Vec<i32>) -> u32 {
     let mut acc= 0;
     let mut offset : i32 = 0;
-    let len = instructions.len() as i32;
-    let mut instr = instructions;
-    while offset >= 0 && offset < len  {
-        instr[offset as usize] += 1;
-        {
-            // unfortunately have to decrement here because of borrowing rules mean
-            // the increment has happened first :/
-            let jump = instr.get(offset as usize).unwrap() -1; 
-            offset = offset + jump;
-        }
+
+    while offset >= 0 && offset < instructions.len() as i32 {
+        let cell = instructions.get(offset as usize).unwrap();
+        let jump = cell.get();
+        cell.set(f(jump));
+        offset += jump;
 
 //      println!("{:?} offset = {} acc = {}", instr, offset, acc);
 
@@ -26,3 +21,4 @@ fn process(instructions : Vec<i32>) -> u32 {
     }
     acc
 }
+
