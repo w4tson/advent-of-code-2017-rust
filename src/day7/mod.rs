@@ -36,7 +36,7 @@ fn to_node(line: &str) -> Node {
     let value= cap.get(2).map_or(0, |m| m.as_str().parse().unwrap_or(0));
     let links: Option<Vec<String>> = cap.get(3).map(to_links);
     
-    println!("{} ({}) ->  {:?}",name, value,  links);
+//    println!("{} ({}) ->  {:?}",name, value,  links);
     
     Node {
         name,
@@ -54,4 +54,6 @@ fn to_links(links : Match) -> Vec<String> {
             .map(String::from)
             .collect()
 }
+
+
 

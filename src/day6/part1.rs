@@ -24,7 +24,6 @@ pub fn solve(memory : &Memory, c : u32) -> u32 {
         if new_count > c { return i  };
         
     }
-    
 
     0
 }
