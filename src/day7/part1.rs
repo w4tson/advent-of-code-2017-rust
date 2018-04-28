@@ -1,20 +1,8 @@
 use std::collections::HashMap;
 use std::collections::HashSet;
 use std::iter::FromIterator;
-
-
-#[derive(Debug)]
-pub struct Node {
-    pub name: String,
-    pub value: i32,
-    pub links: Option<Vec<String>>
-}
-
-#[derive(Debug)]
-pub struct Graph {
-    pub graph: HashMap<String, Node>
-}
-
+use day7::Graph;
+use day7::Node;
 
 pub fn root_node(graph: &Graph) -> &String {
     let connected_nodes: HashMap<&String, &Node> = graph.graph.iter()
@@ -30,9 +18,7 @@ pub fn root_node(graph: &Graph) -> &String {
 }
 
 
-fn unwrap_links(maybe_links : &Option<Vec<String>>) -> Vec<&String> {
-    match maybe_links {
-        None => vec![],
-        Some(links) => links.iter().collect()
-    }
+
+fn unwrap_links(links : &Vec<String>) -> Vec<&String> {
+    links.iter().collect()
 }
