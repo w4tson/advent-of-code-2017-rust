@@ -52,7 +52,7 @@ impl Graph {
         self.to_node(node).links.iter().map(|link| self.to_node(link)).collect()
     }
     
-    pub fn get_unbalanaced_child(&self, node: &String) -> Option<&Node> {
+    pub fn children_grouped_by_weight(&self, node: &String) -> Vec<(i32, Vec<&Node>)> {
         self.links(node).iter()
             .map(|&node| (node, self.weight(&node.name)))
             .collect::<Vec<(&Node, i32)>>()
@@ -61,10 +61,16 @@ impl Graph {
             .iter()
             .group_by(|item| item.1)
             .into_iter()
-            .map(|(_, group)| group.cloned().collect::<Vec<(&Node,i32)>>())
-            .filter(|group| group.len() == 1)
+            .map(|(weight, group)| (weight, group.cloned().map(|(node, _)| node).collect::<Vec<&Node>>()))
+            .collect()
+    }
+    
+    pub fn get_unbalanced_child(&self, node: &String) -> Option<&Node> {
+        self.children_grouped_by_weight(node)
+            .iter()
+            .filter(|(_, group)| group.len() == 1)
             .nth(0)
-            .map(|group| group[0].0)
+            .map(| (_, group)| group[0])
     }
 }
 

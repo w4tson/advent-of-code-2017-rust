@@ -13,11 +13,11 @@ fn part1() {
 fn part2() {
     let graph = build_graph(read_puzzle_input("aoc7"));
     let mut node = Some(root_node(&graph));
-    let mut path : Vec<String> = vec![]; 
+    let mut path : Vec<String> = vec![]; //route through the tree to the bad node
     
     while node.is_some() {
         path.push(node.unwrap().clone());
-        node = graph.get_unbalanaced_child(node.unwrap()).map(|r| &r.name);
+        node = graph.get_unbalanced_child(node.unwrap()).map(|r| &r.name);
         println!("next unbalanced child {:?}", node);
     }
 
@@ -28,7 +28,15 @@ fn part2() {
     println!("{:?}", graph.weights_of_links(&last_unbalanced_node_parent));
 
     let sum_of_children_of_last_unbalanced: i32 = graph.weights_of_links(last_unbalanced_node).iter().sum();
-    let expected_weight = 1486; //calculate this
-    println!("{}", expected_weight - sum_of_children_of_last_unbalanced);
+    
+    let children_by_weight = graph.children_grouped_by_weight(last_unbalanced_node_parent);
+    let expected_weight = children_by_weight
+        .iter()
+        .filter(|(_, group)| group.len() > 1)
+        .nth(0)
+        .map(| (weight, _)| weight)
+        .unwrap();
+    
+    assert_eq!(1458, expected_weight - sum_of_children_of_last_unbalanced);
 }
 
