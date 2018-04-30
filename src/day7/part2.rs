@@ -5,9 +5,9 @@ pub fn amount_to_rebalance(graph: Tree) -> i32 {
     let mut node = Some(root_node(&graph));
     let mut path : Vec<String> = vec![]; //route through the tree to the bad node
     
-    while node.is_some() {
-        path.push(node.unwrap().clone());
-        node = graph.get_unbalanced_child(node.unwrap()).map(|r| &r.name);
+    while let Some(next_node) = node {
+        path.push(next_node.clone());
+        node = graph.get_unbalanced_child(next_node).map(|r| &r.name);
         println!("next unbalanced child {:?}", node);
     }
 

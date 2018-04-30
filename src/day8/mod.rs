@@ -37,7 +37,7 @@ impl Instruction {
         }
     }
     
-    pub fn eval(&self, registers : &mut HashMap<String, i32>) {
+    pub fn eval<'a>(&self, registers : &'a mut HashMap<String, i32>) -> &'a i32 {
         if self.meets_condition(registers) {
             let op = match self.operation {
                 OPERATION::INC => i32::add,
@@ -47,8 +47,9 @@ impl Instruction {
             registers.entry(self.register.clone())
                     .and_modify(|e| *e = op(*e, self.value))
                     .or_insert(op(0,self.value));
-               
+            
         };
+        registers.get(&self.register).unwrap_or(&0)
     }
 }
 
@@ -59,10 +60,12 @@ struct CPU {
 
 impl CPU {
     
-    pub fn eval(&mut self) {
+    pub fn eval(&mut self) -> Vec<i32> {
+        let mut results = vec![];
         for i in &self.instructions {
-            i.eval(&mut self.registers);
-        }   
+            results.push(*i.eval(&mut self.registers));
+        }
+        results
     }
     
     pub fn get_max_value(&self) -> &i32 {
@@ -102,7 +105,6 @@ fn to_instruction(line: &str) -> Instruction {
         conditional_operation,
         conditional_value
     }
-    
 }
 
 fn capture_group_as_string(capture: Option<Match>) -> String {

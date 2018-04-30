@@ -16,3 +16,10 @@ fn part1() {
     cpu.eval();
     assert_eq!(4888, *cpu.get_max_value());
 }
+
+#[test]
+fn part2() {
+    let input = &read_puzzle_input("aoc8");
+    let mut cpu = to_cpu(input);
+    assert_eq!(7774, cpu.eval().into_iter().max().unwrap_or(0));
+}
