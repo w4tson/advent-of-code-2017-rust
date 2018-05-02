@@ -43,3 +43,19 @@ impl CircularIterable for str {
     }
 }
 
+pub trait CircularSubSlice {
+    fn rev_circular_sub_slice(&mut self, pos: usize, length: usize);
+}
+
+impl CircularSubSlice for [i32] {
+
+    fn rev_circular_sub_slice(&mut self, pos: usize, length: usize) {
+        let mut sub = self.iter().cloned().cycle().skip(pos).take(length).collect::<Vec<i32>>();
+        sub.reverse();
+        for i in 0..length {
+            let circular_index = (i + pos) % self.len();
+            self[circular_index..circular_index+1].swap_with_slice(&mut sub[i..i+1]);
+        }
+    }
+}
+
