@@ -5,9 +5,12 @@ pub mod tests;
 
 
 pub fn knot_hash2<T : Into<String>>(input_str: T) -> String {
-    let input_lengths_ascii = input_str.into().chars().map(|c| (c as u8) as usize).collect::<Vec<usize>>();
-    let suffix = vec![17, 31, 73, 47, 23];
-    let input_lengths = [input_lengths_ascii, suffix].concat();
+    let input_lengths = input_str.into()
+        .as_bytes()
+        .iter()
+        .chain([17, 31, 73, 47, 23].iter())
+        .map(|i| *i as usize)
+        .collect::<Vec<usize>>();
 
     let mut input: Vec<i32> = (0..256).collect();
 
