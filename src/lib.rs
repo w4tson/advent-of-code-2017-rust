@@ -1,9 +1,11 @@
 #![feature(swap_with_slice)]
+#![feature(iterator_flatten)]
 
 extern crate spectral;
 extern crate regex;
 extern crate itertools;
 #[macro_use] extern crate lazy_static;
+
 
 
 pub mod utils;
