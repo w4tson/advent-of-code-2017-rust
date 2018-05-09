@@ -1,5 +1,6 @@
 #![feature(swap_with_slice)]
 #![feature(iterator_flatten)]
+#![feature(slice_patterns)]
 
 extern crate spectral;
 extern crate regex;
@@ -21,3 +22,4 @@ pub mod day9;
 pub mod day10;
 pub mod day11;
 pub mod day12;
+pub mod day13;

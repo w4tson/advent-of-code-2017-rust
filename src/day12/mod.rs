@@ -3,7 +3,7 @@ use std::collections::HashMap;
 #[cfg(test)]
 pub mod tests;
 
-fn connections(input : String) -> HashMap<i32, Vec<i32>>{
+fn connections(input : String) -> HashMap<i32, Vec<i32>> {
     input.lines().map(to_entry).collect()
 }
 
