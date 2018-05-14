@@ -42,7 +42,7 @@ fn knot_hash_round(input : &mut Vec<i32>, input_size: i32, input_lengths: &Vec<u
 
 
 fn to_hex(dense_hash: &Vec<i32>) -> String {
-    dense_hash.iter().map(|num| format!("{:x}", *num)).collect()
+    dense_hash.iter().map(|num| format!("{:02x}", *num)).collect()
 }
 
 fn compute_dense_hash(sparse_hash: &Vec<i32>) -> Vec<i32> {

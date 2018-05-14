@@ -31,7 +31,7 @@ fn all_connected_to(from: i32, connections: &HashMap<i32, Vec<i32>>) -> Vec<i32>
     result
 }
 
-fn find_groups(connections: HashMap<i32, Vec<i32>>) -> usize {
+pub fn find_groups(connections: HashMap<i32, Vec<i32>>) -> usize {
     find_groups_internal(connections, vec![]).len() as usize
 }
 
